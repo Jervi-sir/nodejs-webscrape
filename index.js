@@ -21,7 +21,8 @@ var app = express()
 // parse cookies
 // we need this because "cookie" is true in csrfProtection
 app.use(cookieParser())
-
+app.use(bodyParser.json())
+app.use(express.static(path.join(__dirname, 'public'))); 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -31,6 +32,7 @@ app.get("/", csrfProtection, (req, res) => {
 
 app.post("/search", parseForm, csrfProtection,async (req, res) => {
     var start = new Date().getTime();
+    console.log(req.body)
     keyword = req.body.keyword;
     var json = [];
     var rrr = [];
@@ -49,7 +51,6 @@ app.post("/search", parseForm, csrfProtection,async (req, res) => {
 app.listen(3005,() => {
     console.log("server running on port bruh 3005")
 })
-
 
 /*-------------- scraper ------------*/
 

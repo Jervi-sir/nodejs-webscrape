@@ -30,7 +30,7 @@ async function scrape(keyword) {
     const page = await browser.newPage();
     await page.goto(url);
 
-    for(var i = 2; i < 18; i++) {
+    for(var i = 2; i < 4; i++) {
         try {
 
             var imgXpath = '//*[@id="container"]/div/div[3]/div[1]/div[2]/div[' + i + ']/div/div/div/a/div[1]/div[1]/div/div/img';

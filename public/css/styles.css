@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root {
+    --gap: 20px;
+    --fs-big: 25px;
+    --fs-normal: 20px;
+    --fs-small: 15px;
+    --fs-exsmall: 13px;
+}
+
+
+
+html {
+    box-sizing: border-box;
+}
+
+*, *::after, *::before {
+    box-sizing: inherit;
+}
+
+h1, h2, h3, h4, h5, h6, span, p, img {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    padding: 20px 10px;
+    padding-bottom: 0;
+    background-color: #EBEAF1;
+    font-family: 'Poppins', sans-serif;
+}
+
+/*----------- Header -----------*/
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--gap);
+}
+
+header .message {
+    font-style: normal;
+    font-weight: 300;
+    font-size: var(--fs-small);
+    color: #000000;
+}
+
+header .logo img {
+    width: 100%;
+}
+
+/*--------- actions --------*/
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap);
+}
+
+.actions .search {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 10px;
+    width: 80%;
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+.actions .search input {
+    background-color: transparent;
+    border: none;
+}
+
+.actions .settings {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+
+    background: #FFFFFF;
+    border-radius: 9px;
+}
+
+
+/*-------- footer --------*/
+footer {
+    text-align: center;
+    font-style: normal;
+    font-weight: normal;
+    font-size: var(--fs-small);
+    line-height: 29px;
+
+    color: #000000;
+    margin-top: 1rem;
+}
