@@ -15,7 +15,7 @@
 <div id="app" class="body">
     <header>
         <div class="logo">
-            <img src="images/logo.svg" alt="">
+            <img src="images/logo.svg" alt="Best Price Shop">
         </div>
         <div class="message">
             Hunt you price
@@ -24,14 +24,14 @@
 
     <div class="actions">
         <div class="search">
-            <img src="images/search.svg" alt="">
+            <img src="images/search.svg" alt="search" v-on:click="search">
             <input type="hidden" ref="csrf" name="_csrf" value="<%= csrfToken %>" >
             <input type="text" id="search" placeholder="Trendy keyword" v-model="keyword" @keyup.enter="search">
             <button type="submit" v-on:click="search">search</button>
 
         </div>
         <div class="settings">
-            <img src="images/settings.svg" alt="">
+            <img src="images/settings.svg" alt="Best Price Shop">
         </div>
     </div>
 
@@ -41,7 +41,7 @@
         </div>
         <div class="card" v-for="(product, index) in results" :key="index">
             <div class="image">
-                <img :src="product.image" alt="">
+                <img :src="product.image" alt="Best Price Shop Product">
             </div>
             <div class="details">
                 <div class="title">
