@@ -83,7 +83,7 @@
                         },
                         body: JSON.stringify({ keyword: this.keyword })
                     };
-                    fetch("http://localhost:3005/search", requestOptions)
+                    fetch("/search", requestOptions)
                         .then(response => response.json())
                         .then(data => (this.results = data));
                 }
