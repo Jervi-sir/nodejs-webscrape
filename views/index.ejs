@@ -25,7 +25,7 @@
         <div class="search">
             <img src="images/search.svg" alt="">
             <input type="hidden" ref="csrf" name="_csrf" value="<%= csrfToken %>" >
-            <input type="text" id="search" placeholder="Search" v-model="keyword">
+            <input type="text" id="search" placeholder="Search" v-model="keyword" @keyup.enter="search">
             <button type="submit" v-on:click="search">search</button>
 
         </div>
