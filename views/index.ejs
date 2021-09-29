@@ -13,7 +13,7 @@
 </head>
 <body>
 <div id="app" class="body">
-    <header>
+    <header class="slideDown">
         <div class="logo">
             <img src="images/logo.svg" alt="Best Price Shop">
         </div>
@@ -22,7 +22,7 @@
         </div>
     </header>
 
-    <div class="actions">
+    <div class="actions slideDown">
         <div class="search">
             <img src="images/search.svg" alt="search" v-on:click="search">
             <input type="hidden" ref="csrf" name="_csrf" value="<%= csrfToken %>" >
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <main>
+    <main >
         <div class="found">
             Found <span> {{ results.length }} Results </span>
         </div>
@@ -59,8 +59,9 @@
 
         </div>
     </main>
-    <footer>
+    <footer class="slideDown">
         Copyright - Made By BPS
+        <button v-on:click="slideUp">slideUp</button>
     </footer>
 </div>
     <script>
@@ -69,10 +70,12 @@
             data: {
                 keyword: '',
                 results: [],
+                shown: false,
             },
 
             methods: {
                 search: function () {
+                    this.slideUp();
                     this.results = [];
                     var token = this.$refs.csrf.value;
                     console.log(token)
@@ -87,6 +90,20 @@
                     fetch("/search", requestOptions)
                         .then(response => response.json())
                         .then(data => (this.results = data));
+                },
+                slideUp: function () {
+                    if(!this.shown) {
+                        var header = document.getElementsByTagName('header')[0];
+                        var actions = document.getElementsByClassName('actions')[0];
+                        var main = document.getElementsByTagName('main')[0];
+
+                        //show main 
+                        //main.classList.add('show');
+                        header.classList.remove('slideDown');
+                        actions.classList.remove('slideDown');
+
+                        console.log(actions)
+                    }
                 }
             }
         })

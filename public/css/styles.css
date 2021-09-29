@@ -34,6 +34,9 @@ header {
     justify-content: space-between;
     align-items: center;
     margin-bottom: var(--gap);
+
+    transform: translateY(0);
+    transition: 0.5s;
 }
 
 header .message {
@@ -53,6 +56,9 @@ header .logo img {
     justify-content: space-between;
     align-items: center;
     gap: var(--gap);
+
+    transform: translateY(0);
+    transition: 0.5s;
 }
 
 .actions .search {
@@ -99,6 +105,21 @@ header .logo img {
 
     background: #FFFFFF;
     border-radius: 9px;
+}
+
+/*-------  slide down / up ----------*/
+main {
+    opacity: 0;
+}
+
+.slideDown{
+    transform: translateY(10rem);
+    transition: 0.5s;
+}
+
+.show {
+    opacity: 1;
+    transition: opacity 0.5s;
 }
 
 
