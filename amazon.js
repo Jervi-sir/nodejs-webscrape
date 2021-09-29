@@ -20,20 +20,26 @@ const options = {
 };
 
 async function scrape(keyword) {
-
+    json = [];
+    
     keyword = keyword.replace(/ /g, '+');
 
-    var url = 'https://www.amazon.com/s?k=' + keyword +'+&ref=nb_sb_noss_1';
+    var url = 'view-source:https://www.amazon.com/s?k=' + keyword +'&ref=nb_sb_noss';
     //Launch Browser    
     const browser = await puppeteer.launch(options);
-    var start = new Date().getTime();
+
     //New page Browser    
     const page = await browser.newPage();
-    await page.goto(url);
-    
-    for(var i = 2; i < 4; i++) {
-        try {
 
+    var start1 = new Date().getTime();
+        await page.goto(url);
+    var end1 = new Date().getTime();
+    var time1 = end1 - start1;
+    console.log('goto= ' + time1);
+    
+
+    for(var i = 2; i < 18; i++) {
+        try {
             var imgXpath = '//*[@id="search"]/div[1]/div[1]/div/span[3]/div[2]/div[' + i + ']/div/span/div/div/div[2]/div[1]/div/div/span/a/div/img';
             var titleXpath = '//*[@id="search"]/div[1]/div[1]/div/span[3]/div[2]/div[' + i + ']/div/span/div/div/div[2]/div[2]/div/div/div[1]/h2/a/span';
             var priceXpath = '//*[@id="search"]/div[1]/div[1]/div/span[3]/div[2]/div[' + i + ']/div/span/div/div/div[2]/div[2]/div/div/div[3]/div[1]/div/div[1]/div[1]/a/span[1]/span[2]';
@@ -69,17 +75,20 @@ async function scrape(keyword) {
             continue
         }
     }
+
     await browser.close();
     //console.log(json)
-    var end = new Date().getTime();
-    var time = end - start;
-    console.log("amanzon.js = " + time)
     return json;
 }
 
 module.exports = { scrape };
 
-
+/*
+    var start = new Date().getTime();
+    var end = new Date().getTime();
+    var time = end - start;
+*/
 
 //*[@id="search"]/div[1]/div[1]/div/span[3]/div[2]/div[1]
 //*[@id="search"]/div[1]/div[1]/div/span[3]/div[2]/div[2]
+

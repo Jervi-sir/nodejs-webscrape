@@ -26,7 +26,7 @@
         <div class="search">
             <img src="images/search.svg" alt="">
             <input type="hidden" ref="csrf" name="_csrf" value="<%= csrfToken %>" >
-            <input type="text" id="search" placeholder="Search" v-model="keyword" @keyup.enter="search">
+            <input type="text" id="search" placeholder="Trendy keyword" v-model="keyword" @keyup.enter="search">
             <button type="submit" v-on:click="search">search</button>
 
         </div>
@@ -37,7 +37,7 @@
 
     <main>
         <div class="found">
-            Found <span> 10 Results </span>
+            Found <span> {{ results.length }} Results </span>
         </div>
         <div class="card" v-for="(product, index) in results" :key="index">
             <div class="image">
@@ -46,7 +46,7 @@
             <div class="details">
                 <div class="title">
                     <h2>{{ product.title }}</h2>
-                    <h3>subtitle</h3>
+                    <!-- <h3>subtitle</h3>-->
                 </div>
                 <div class="price">
                     <h4>{{ product.price }}</h4>
@@ -59,6 +59,7 @@
 
         </div>
     </main>
+    {{ results }}
     <footer>
         Copyright - Made By BPS
     </footer>
@@ -73,6 +74,7 @@
 
             methods: {
                 search: function () {
+                    this.results = [];
                     var token = this.$refs.csrf.value;
                     console.log(token)
                     const requestOptions = {

@@ -72,6 +72,10 @@ header .logo img {
     border: none;
 }
 
+.actions .search input:focus {
+    outline: none;
+}
+
 .actions .search button {
     margin-left: auto;
     background: #000000;

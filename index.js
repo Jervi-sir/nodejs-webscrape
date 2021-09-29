@@ -3,12 +3,15 @@ var csrf = require('csurf')
 var cookieParser = require('cookie-parser')
 const path = require('path')
 const bodyParser = require('body-parser')
+const helper =  require("./helper")
 
 const  scrapeAmazon =  require("./amazon")
 const  scrapeFlipkart =  require("./flipkart")
 const  scrapeGumtree =  require("./gumtree")
 
-const puppeteer = require('puppeteer');
+const  scrape =  require("./webscrape")
+
+
 const { resolve } = require('path')
 
 // setup route middlewares
@@ -32,20 +35,18 @@ app.get("/", csrfProtection, (req, res) => {
 
 app.post("/search", parseForm, csrfProtection,async (req, res) => {
     var start = new Date().getTime();
-    console.log(req.body)
-    keyword = req.body.keyword;
-    var json = [];
-    var rrr = [];
-    var rrr2 = [];
-    var rrr = await amazon(keyword);
-    var rrr2 = await flipkart(keyword);
 
-    json = mergeJson(rrr, rrr2, rrr2)
+    console.log(req.body)
+
+    keyword = req.body.keyword;
+    var resultt = await nodeScrape(keyword);
+    console.log(resultt)
     var end = new Date().getTime();
     var time = end - start;
+
     console.log("global = " + time)
     res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(json));
+    res.end(JSON.stringify(resultt));
 });
 
 app.listen(process.env.PORT || 3000,() => {
@@ -54,48 +55,12 @@ app.listen(process.env.PORT || 3000,() => {
 
 /*-------------- scraper ------------*/
 
-async function amazon(keyword) {
+async function nodeScrape(keyword) {
     return new Promise(resolve => {
-        var start = new Date().getTime();
-        
-        scrapeAmazon.scrape(keyword).then((result) => {
-            resolve(result);
-
-            var end = new Date().getTime();
-            var time = end - start;
-            console.log("amanzon.promise = " + time)
-        })
-    });
-}
-
-async function flipkart(keyword) {
-    return new Promise(resolve => {
-        var start = new Date().getTime();
-        
-        scrapeFlipkart.scrape(keyword).then((result) => {
-            resolve(result);
-
-            var end = new Date().getTime();
-            var time = end - start;
-            console.log("flipkart.promise = " + time)
-        })
-    });
-}
-
-async function gumtree(keyword) {
-    return new Promise(resolve => {
-        scrapeGumtree.scrape(keyword).then((result) => {
+        scrape.launchBrowser(keyword).then((result) => {
             resolve(result);
         })
     });
-}
-
-function mergeJson() {
-    var json = [];
-    for(var i = 0; i < arguments.length; i++) {
-        json = json.concat(arguments[i])
-    }
-    return json;
 }
 
 

@@ -20,19 +20,19 @@ const options = {
 };
 
 async function scrape(keyword) {
+    json = [];
+    
     var keyword = keyword.replace(/ /g, '%20') 
 
     var url = 'https://www.flipkart.com/search?q=' + keyword +'&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off';
     //Launch Browser    
     const browser = await puppeteer.launch(options);
-    var start = new Date().getTime();
     //New page Browser    
     const page = await browser.newPage();
     await page.goto(url);
 
     for(var i = 2; i < 4; i++) {
         try {
-
             var imgXpath = '//*[@id="container"]/div/div[3]/div[1]/div[2]/div[' + i + ']/div/div/div/a/div[1]/div[1]/div/div/img';
             var titleXpath = '//*[@id="container"]/div/div[3]/div[1]/div[2]/div[' + i + ']/div/div/div/a/div[2]/div[1]/div[1]';
             var priceXpath = '//*[@id="container"]/div/div[3]/div[1]/div[2]/div[' + i + ']/div/div/div/a/div[2]/div[2]/div[1]/div/div';
@@ -69,10 +69,6 @@ async function scrape(keyword) {
         }
     }
     await browser.close();
-
-    var end = new Date().getTime();
-    var time = end - start;
-    console.log("flipkart.js = " + time)
 
     return json;
 }

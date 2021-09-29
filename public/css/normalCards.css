@@ -9,7 +9,6 @@ main .found {
     font-style: normal;
     font-weight: normal;
     font-size: var(--fs-big);
-    line-height: 29px;
 
     color: #000000;
 }
@@ -46,7 +45,6 @@ main .card .details .title h2 {
     font-style: normal;
     font-weight: bold;
     font-size: var(--fs-normal);
-    line-height: 15px;
 
     color: #000000;
 }
@@ -55,7 +53,6 @@ main .card .details .title h3 {
     font-style: normal;
     font-weight: normal;
     font-size: var(--fs-small);
-    line-height: 12px;
     
     color: #585858;
 }
@@ -64,7 +61,6 @@ main .card .details .price h4 {
     font-style: normal;
     font-weight: bold;
     font-size: var(--fs-small);
-    line-height: 15px;
     
     color: #000000;
 }
@@ -86,7 +82,6 @@ main .card .source h5 {
     font-style: normal;
     font-weight: bold;
     font-size: var(--fs-exsmall);
-    line-height: 12px;
 
     color: #BBBBBB;
 
