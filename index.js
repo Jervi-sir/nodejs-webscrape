@@ -48,9 +48,7 @@ app.post("/search", parseForm, csrfProtection,async (req, res) => {
     res.end(JSON.stringify(json));
 });
 
-const port = process.env.PORT || 3000
-
-app.listen(3000,() => {
+app.listen(process.env.PORT || 3000,() => {
     console.log("server running on port bruh 3000")
 })
 
