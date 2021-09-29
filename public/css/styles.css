@@ -8,8 +8,6 @@
     --fs-exsmall: 13px;
 }
 
-
-
 html {
     box-sizing: border-box;
 }
@@ -24,7 +22,6 @@ h1, h2, h3, h4, h5, h6, span, p, img {
 }
 
 body {
-    padding: 20px 10px;
     padding-bottom: 0;
     background-color: #EBEAF1;
     font-family: 'Poppins', sans-serif;
@@ -66,12 +63,28 @@ header .logo img {
     width: 80%;
     background: #FFFFFF;
     border-radius: 10px;
+    flex: 1;
 }
 
 .actions .search input {
     background-color: transparent;
+    flex: 1;
     border: none;
 }
+
+.actions .search button {
+    margin-left: auto;
+    background: #000000;
+    border-radius: 4px;
+    color: white;
+    border: none;
+    padding: 5px 20px;
+}
+
+.actions .search button:hover {
+    cursor: pointer;
+}
+
 
 .actions .settings {
     display: flex;

@@ -1,0 +1,20 @@
+.body {
+    width: 600px;
+    margin: auto;
+    padding: 20px 10px;
+    /*border: 2px solid #cdcdcd;*/
+}
+
+@media only screen and (max-width: 1200px){
+    /*Tablets [601px -> 1200px]*/
+}
+@media only screen and (max-width: 600px){
+	.body {
+        width: unset;
+        margin: unset;
+        border: none;
+    }
+}
+@media only screen and (max-width: 425px){
+	/*Small smartphones [325px -> 425px]*/
+}
