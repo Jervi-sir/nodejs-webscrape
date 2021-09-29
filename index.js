@@ -48,8 +48,10 @@ app.post("/search", parseForm, csrfProtection,async (req, res) => {
     res.end(JSON.stringify(json));
 });
 
-app.listen(3005,() => {
-    console.log("server running on port bruh 3005")
+const port = process.env.PORT || 3000
+
+app.listen(3000,() => {
+    console.log("server running on port bruh 3000")
 })
 
 /*-------------- scraper ------------*/
