@@ -34,17 +34,18 @@ app.get("/", csrfProtection, (req, res) => {
 });
 
 app.post("/search", parseForm, csrfProtection,async (req, res) => {
-    var start = new Date().getTime();
+    var globalAll = new Date().getTime();
 
     console.log(req.body)
 
     keyword = req.body.keyword;
+
+    var globalScrape = new Date().getTime(); 
     var resultt = await nodeScrape(keyword);
 
-    var end = new Date().getTime();
-    var time = end - start;
+    console.log("globalScrape = " + ((new Date().getTime()) - globalScrape));
+    console.log("globalAll = " + ((new Date().getTime()) - globalAll));
 
-    console.log("global = " + time)
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(resultt));
 });
@@ -54,10 +55,11 @@ app.listen(process.env.PORT || 3000,() => {
 })
 
 /*-------------- scraper ------------*/
-
 async function nodeScrape(keyword) {
     return new Promise(resolve => {
+        var globalScrape = new Date().getTime();
         scrape.launchBrowser(keyword).then((result) => {
+            console.log("async call scrape = " + ((new Date().getTime()) - globalScrape))
             resolve(result);
         })
     });

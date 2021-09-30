@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <title>Best Price Shop</title>
     <meta name="csrf-token" content="">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <link rel="stylesheet" href="css/styles.css">
@@ -17,7 +18,7 @@
         <div class="logo">
             <img src="images/logo.svg" alt="Best Price Shop">
         </div>
-        <div class="message">
+        <div class="message" >
             Hunt you price
         </div>
     </header>
@@ -28,18 +29,35 @@
             <input type="hidden" ref="csrf" name="_csrf" value="<%= csrfToken %>" >
             <input type="text" id="search" placeholder="Trendy keyword" v-model="keyword" @keyup.enter="search">
             <button type="submit" v-on:click="search">search</button>
-
         </div>
-        <div class="settings">
-            <img src="images/settings.svg" alt="Best Price Shop">
+        <div class="settings hide">
+            <img src="images/settings.svg" alt="Best Price Shop" v-on:click="sortDescendant">
         </div>
     </div>
 
+    <div class="filter">
+        <div class="sort">
+            <span>Price</span>
+            <div class="buttons">
+                <button v-on:click="sortAscendant">ascendant <img src="images/up.svg" alt="" width="10px"></button>
+                <button v-on:click="sortDescendant">descendant <img src="images/down.svg" alt="" width="10px"></button>
+                <button v-on:click="sortRandom">random</button>
+            </div>
+        </div>
+        <div class="sites">
+            <span>Source</span>
+            <div class="buttons">
+                <button>amazon</button>
+                <button>flipkart</button>
+                <button>all</button>
+            </div>
+        </div>
+    </div>
     <main>
         <div class="found">
             Found <span> {{ results.length }} Results </span>
         </div>
-        <div class="card" v-for="(product, index) in results" :key="index">
+        <div class="card" v-for="(product, index) in results" :key="product.id">
             <div class="image">
                 <img :src="product.image" alt="Best Price Shop Product">
             </div>
@@ -50,7 +68,7 @@
                     <!-- <h3>subtitle</h3>-->
                 </a>
                 <div class="price">
-                    <h4>{{ product.price }}</h4>
+                    <p>{{ product.price }}</p>
                 </div>
             </div>
             <div class="source">
@@ -81,6 +99,7 @@
     <footer class="footerDown">
         Copyright - Made By BPS
     </footer>
+    {{rootResults}}
 </div>
     <script>
         var app = new Vue({
@@ -88,11 +107,16 @@
             data: {
                 keyword: '',
                 results: [],
+                rootResults: [],
                 shown: false,
             },
 
             methods: {
                 search: function () {
+                    if (!this.keyword.replace(/\s/g, '').length) {
+                        return 0;
+                    }
+                    
                     this.slideUp();
                     this.skeletonShow();
                     
@@ -109,7 +133,8 @@
                     };
                     fetch("/search", requestOptions)
                         .then(response => response.json())
-                        .then(data => (this.results = data))
+                        .then(data => (this.rootResults = data))
+                        .then(data => (this.results = this.rootResults))
                         .then(() => {this.skeletonHide()});
                 },
                 slideUp: function () {
@@ -129,7 +154,10 @@
 
                 skeletonShow: function() {
                     const faker = document.querySelector('.faker')
+                    const settings = document.querySelector('.settings')
+
                     faker.style.display = 'block';
+                    settings.classList.remove('hide');
                     setTimeout(() => {
                         faker.classList.add('show');
                     }, 100);
@@ -140,7 +168,46 @@
                     faker.style.display = 'none';
                     const main = document.getElementsByTagName('main')[0];
                     main.style.opacity = 1;
+                },
+                sortAscendant: function() {
+                    this.results = this.rootResults.slice().sort(function(a, b) {
+                        return a.priceAmount - b.priceAmount;
+                    });
+                    console.log(this.results)
+                },
+                sortDescendant: function() {
+                    this.results = this.rootResults.slice().sort(function(a, b) {
+                        return b.priceAmount - a.priceAmount;
+                    });
+                    console.log(this.results)
+                },
+                sortRandom: function() {
+                    min = Math.ceil(0);
+                    max = Math.floor(rootResults.length);
+
+                    this.rootResults.forEach((item, index)=>{
+                        item.order = Math.floor(Math.random() * (max - min) + min); 
+                    });
+                },
+                sourceAmazon: function() {
+
+                },
+                sourceFlipkart: function() {
+
+                },
+                sourceRandom: function() {
+
+                },
+                sourceAscendant: function() {
+
+                },
+                sourceDescendant: function() {
+
+                },
+                pagination: function(number) {
+
                 }
+
             }
         })
     </script>

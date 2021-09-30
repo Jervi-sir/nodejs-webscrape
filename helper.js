@@ -6,4 +6,42 @@ function mergeJson() {
     return json;
 }
 
-module.exports = { mergeJson };
+function currencyCnv(price) {
+    var currency = price.slice(0, 1);
+    //no comma no dot no currency
+    var price = price.slice(1).replace(/,/g, '').split('.')[0];
+    if(currency == "₹") {
+        var total = price * 0.013;
+        total = Number((total).toFixed(0))
+        return total;
+    }
+
+    if(currency == "£") {
+        var total = price * 1.34;
+        total = Number((total).toFixed(0))
+        return total;
+    }
+
+    if(currency == "€") {
+        var total = price * 1.16;
+        total = Number((total).toFixed(0))
+        return total;
+    }
+
+    if(currency == "$") {
+        total = Number((total).toFixed(0))
+        return total;
+    }
+}
+
+module.exports = { mergeJson, currencyCnv };
+
+/*
+var price = 1470000;
+
+let dollarUSLocale = Intl.NumberFormat('en-US');
+let dollarIndianLocale = Intl.NumberFormat('en-IN');
+
+console.log("US Locale output: " + dollarUSLocale.format(price));
+console.log("Indian Locale output: " + dollarIndianLocale.format(price));*
+*/

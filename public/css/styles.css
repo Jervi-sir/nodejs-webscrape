@@ -107,6 +107,64 @@ header .logo img {
     border-radius: 9px;
 }
 
+.actions .settings.hide {
+    display: none;
+}
+
+/*------- Fliters ----*/
+
+.filter {
+    display: none;
+    opacity: 0;
+    flex-direction: column;
+    gap: 15px;
+    background: #FFFFFF;
+    border-radius: 15px;
+    padding: 0.5rem 3rem;
+}
+
+.filter .sort,
+.filter .sites {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.filter .buttons {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.filter span {
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 600;
+    font-size: var(--fs-exsmall);
+    color: #000000;
+}
+
+.filter button {
+    font-family: inherit;
+    background-color: transparent;
+    border: none;
+    font-style: normal;
+    font-weight: normal;
+    font-size: var(--fs-exsmall);
+    color: #000000;
+}
+
+.filter button img {
+    margin-left: 2px;
+}
+
+.filter button:hover {
+    cursor: pointer;
+    color: #00000086;
+    transition: 0.2s;
+}
+
 /*-------  slide down / up ----------*/
 main {
     opacity: 0;
