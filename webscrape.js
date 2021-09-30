@@ -63,12 +63,12 @@ async function amazon(keyword, browser) {
             
             var data = {
                 image: img,
-                title: title,
+                title: title.split(' ').slice(0, 4).join(' '),
+                subtitle: title.split(' ').slice(4, 10).join(' '),
                 price: price,
                 link: link,
                 source: 'amazon'
             }
-
             jsonAmazon.push(data);
         } catch(error) {
             continue
@@ -112,7 +112,8 @@ async function flipkart(keyword, browser) {
             
             var data = {
                 image: img,
-                title: title,
+                title: title.split(' ').slice(0, 4).join(' '),
+                subtitle: title.split(' ').slice(4, 10).join(' '),
                 price: price,
                 link: link,
                 source: 'flipkart'

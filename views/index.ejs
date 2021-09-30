@@ -44,8 +44,9 @@
                 <img :src="product.image" alt="Best Price Shop Product">
             </div>
             <div class="details">
-                <a :href="product.link " class="title">
+                <a :href="product.link " class="title" target="_blank">
                     <h2>{{ product.title }}</h2>
+                    <h3>{{ product.subtitle }}</h3>
                     <!-- <h3>subtitle</h3>-->
                 </a>
                 <div class="price">
