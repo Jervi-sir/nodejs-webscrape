@@ -77,9 +77,8 @@
             </div>
         </div>
     </div>
-    <footer class="slideDown">
+    <footer class="footerDown">
         Copyright - Made By BPS
-        <button v-on:click="slideUp">slideUp</button>
     </footer>
 </div>
     <script>
@@ -117,20 +116,19 @@
                         var header = document.getElementsByTagName('header')[0];
                         var actions = document.getElementsByClassName('actions')[0];
                         var main = document.getElementsByTagName('main')[0];
-
+                        var footer = document.getElementsByTagName('footer')[0]
                         //show main 
                         //main.classList.add('show');
                         header.classList.remove('slideDown');
                         actions.classList.remove('slideDown');
-
-                        
+                        footer.classList.remove('footerDown');
                         this.shown = true;
                     }
                 },
 
                 skeletonShow: function() {
                     const faker = document.querySelector('.faker')
-                    faker.style.display = 'grid';
+                    faker.style.display = 'block';
                     setTimeout(() => {
                         faker.classList.add('show');
                     }, 100);
@@ -139,7 +137,7 @@
                 skeletonHide: function() {
                     const faker = document.querySelector('.faker')
                     faker.style.display = 'none';
-                    const main = document.getElementsByTagName('main')[0]
+                    const main = document.getElementsByTagName('main')[0];
                     main.style.opacity = 1;
                 }
             }
