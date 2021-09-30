@@ -40,7 +40,7 @@ app.post("/search", parseForm, csrfProtection,async (req, res) => {
 
     keyword = req.body.keyword;
     var resultt = await nodeScrape(keyword);
-    console.log(resultt)
+
     var end = new Date().getTime();
     var time = end - start;
 

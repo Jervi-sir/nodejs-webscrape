@@ -122,6 +122,78 @@ main {
     transition: opacity 0.5s;
 }
 
+.skeleton {
+    opacity: .7;
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+  
+.skeleton-text {
+    width: 100%;
+    height: .5rem;
+    margin-bottom: .25rem;
+    border-radius: .2rem;
+}
+  
+.skeleton-text:last-child {
+    margin-bottom: 0;
+    width: 80%;
+}
+  
+@keyframes skeleton-loading {
+    0% {
+      background-color: hsl(200, 20%, 70%);
+    }
+  
+    100% {
+      background-color: hsl(200, 20%, 95%);
+    }
+}
+
+
+.faker {
+    display: none;
+    opacity: 0;
+}
+
+.faker.show {
+    opacity: 1;
+    transition:opacity 0.5s;
+}
+
+.faker .card {
+    margin-bottom: 20px;
+}
+
+.faker .card .image {
+    height: 10rem;
+    width: 10rem;
+    border-radius: 0.3rem;
+}
+
+.faker .details{
+    width: 15rem;
+}
+
+.faker h2, .faker h3 {
+    height: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.faker .price {
+    width: 7rem;
+}
+
+.faker .source {
+    width: 15px;
+}
+
+.faker .source h5 {
+    height: 5rem;
+
+}
+  
+  
 
 /*-------- footer --------*/
 footer {
