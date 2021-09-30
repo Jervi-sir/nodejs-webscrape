@@ -114,15 +114,16 @@ header .logo img {
 /*------- Fliters ----*/
 
 .filter {
-    display: none;
+    display: flex;
     opacity: 0;
     flex-direction: column;
     gap: 15px;
     background: #FFFFFF;
     border-radius: 15px;
     padding: 0.5rem 3rem;
-}
+    margin: 1rem 0;
 
+}
 .filter .sort,
 .filter .sites {
     display: flex;
@@ -155,6 +156,7 @@ header .logo img {
     color: #000000;
 }
 
+
 .filter button img {
     margin-left: 2px;
 }
@@ -165,58 +167,31 @@ header .logo img {
     transition: 0.2s;
 }
 
-/*-------  slide down / up ----------*/
-main {
-    opacity: 0;
+.filter button.active {
+    font-weight: 600;
+    transition: 0.2s;
 }
 
-.slideDown{
-    transform: translateY(10rem);
-    transition: 0.5s;
+.filter button:hover.active {
+    font-weight: 600;
+    transition: 0.2s;
+    color: #00000086;
 }
 
-.show {
-    opacity: 1;
-    transition: opacity 0.5s;
-}
-
-.skeleton {
-    opacity: .7;
-    animation: skeleton-loading 1s linear infinite alternate;
-}
-
-  
-.skeleton-text {
-    width: 100%;
-    height: .5rem;
-    margin-bottom: .25rem;
-    border-radius: .2rem;
-}
-  
-.skeleton-text:last-child {
-    margin-bottom: 0;
-    width: 80%;
-}
-  
-@keyframes skeleton-loading {
-    0% {
-      background-color: hsl(200, 20%, 70%);
-    }
-  
-    100% {
-      background-color: hsl(200, 20%, 95%);
-    }
-}
 
 
 .faker {
     display: none;
     opacity: 0;
+    transition: 0.2s ease-out;
 }
 
 .faker.show {
     opacity: 1;
     transition:opacity 0.5s;
+    position: relative;
+    top: -7rem;
+    transition: 0.2s ease-out;
 }
 
 .faker .card {
@@ -227,6 +202,13 @@ main {
     height: 10rem;
     width: 10rem;
     border-radius: 0.3rem;
+}
+
+.faker .found {
+    font-style: normal;
+    font-weight: normal;
+    font-size: var(--fs-big);
+    color: #000000;
 }
 
 .faker .details{
@@ -271,3 +253,73 @@ footer {
     left: 0;
     right: 0;
 }
+
+
+/*-------  slide down / up ----------*/
+main {
+    opacity: 0;
+    position: relative;
+    top: -4rem;
+    transition: 0.2s ease-out;
+}
+
+main.show-filter {
+    top:0;
+    transition: 0.2s ease-out;
+}
+
+.filter {
+    opacity: 0;
+    top: -4rem;
+    transition: 0.2s ease-out;
+}
+
+.filter.show-filter {
+    opacity: 1;
+    top: 0;
+    transition: 0.2s ease-out;
+}
+
+.faker.show-filter {
+    top: -2rem;
+    transition: 0.2s ease-out;
+}
+
+.slideDown{
+    transform: translateY(10rem);
+    transition: 0.5s;
+}
+
+.show {
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+.skeleton {
+    opacity: .7;
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+  
+.skeleton-text {
+    width: 100%;
+    height: .5rem;
+    margin-bottom: .25rem;
+    border-radius: .2rem;
+}
+  
+.skeleton-text:last-child {
+    margin-bottom: 0;
+    width: 80%;
+}
+  
+@keyframes skeleton-loading {
+    0% {
+      background-color: hsl(200, 20%, 70%);
+    }
+  
+    100% {
+      background-color: hsl(200, 20%, 95%);
+    }
+}
+
+

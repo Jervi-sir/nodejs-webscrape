@@ -1,11 +1,11 @@
-
 main {
     display: flex;
     flex-direction: column;
     gap: var(--gap);
+    margin-top: 1rem;
 }
+
 main .found {
-    margin-top: var(--gap);
     font-style: normal;
     font-weight: normal;
     font-size: var(--fs-big);

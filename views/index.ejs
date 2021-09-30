@@ -30,8 +30,8 @@
             <input type="text" id="search" placeholder="Trendy keyword" v-model="keyword" @keyup.enter="search">
             <button type="submit" v-on:click="search">search</button>
         </div>
-        <div class="settings hide">
-            <img src="images/settings.svg" alt="Best Price Shop" v-on:click="sortDescendant">
+        <div class="settings hide" v-on:click="filter">
+            <img src="images/settings.svg" alt="Best Price Shop" >
         </div>
     </div>
 
@@ -39,9 +39,9 @@
         <div class="sort">
             <span>Price</span>
             <div class="buttons">
-                <button v-on:click="sortAscendant">ascendant <img src="images/up.svg" alt="" width="10px"></button>
-                <button v-on:click="sortDescendant">descendant <img src="images/down.svg" alt="" width="10px"></button>
-                <button v-on:click="sortRandom">random</button>
+                <button v-on:click="sortAscendant($event)">ascendant <img src="images/up.svg" alt="" width="10px"></button>
+                <button v-on:click="sortDescendant($event)">descendant <img src="images/down.svg" alt="" width="10px"></button>
+                <button v-on:click="sortRandom($event)">random</button>
             </div>
         </div>
         <div class="sites">
@@ -77,6 +77,9 @@
         </div>
     </main>
     <div class="faker" id="faker">
+        <div class="found">
+            Searching for products
+        </div>
         <div class="card" v-for="index in 5" :key="index">
             <div class="image skeleton skeleton-image">
             </div>
@@ -99,16 +102,17 @@
     <footer class="footerDown">
         Copyright - Made By BPS
     </footer>
-    {{rootResults}}
 </div>
     <script>
         var app = new Vue({
             el: '#app',
             data: {
+                oldKeyword: '',
                 keyword: '',
                 results: [],
                 rootResults: [],
                 shown: false,
+                filterShown: false,
             },
 
             methods: {
@@ -116,10 +120,19 @@
                     if (!this.keyword.replace(/\s/g, '').length) {
                         return 0;
                     }
-                    
+
+                    if(this.keyword == this.oldKeyword) {
+                        return 0;
+                    }
+                    this.oldKeyword = this.keyword;
+
+                    //hide title 
+                    document.querySelector('.found').style.opacity = 0;
+
+                    //if new search
                     this.slideUp();
                     this.skeletonShow();
-                    
+
                     this.results = [];
                     var token = this.$refs.csrf.value;
                     console.log(token)
@@ -135,7 +148,10 @@
                         .then(response => response.json())
                         .then(data => (this.rootResults = data))
                         .then(data => (this.results = this.rootResults))
-                        .then(() => {this.skeletonHide()});
+                        .then(() => {
+                            this.skeletonHide();
+                            document.querySelector('.found').style.opacity = 1;
+                        });
                 },
                 slideUp: function () {
                     if(!this.shown) {
@@ -151,7 +167,6 @@
                         this.shown = true;
                     }
                 },
-
                 skeletonShow: function() {
                     const faker = document.querySelector('.faker')
                     const settings = document.querySelector('.settings')
@@ -162,26 +177,49 @@
                         faker.classList.add('show');
                     }, 100);
                 },
-
                 skeletonHide: function() {
                     const faker = document.querySelector('.faker')
                     faker.style.display = 'none';
                     const main = document.getElementsByTagName('main')[0];
                     main.style.opacity = 1;
                 },
-                sortAscendant: function() {
+                filter: function() {
+                    const main = document.getElementsByTagName('main')[0];
+                    const filter = document.querySelector('.filter')
+                    const faker = document.querySelector('.faker')
+                    
+                    if(!this.filterShown) {
+                        main.classList.add('show-filter');
+                        filter.classList.add('show-filter');
+                        faker.classList.add('show-filter');
+                        this.filterShown = true;
+                    } else {
+                        main.classList.remove('show-filter')
+                        filter.classList.remove('show-filter')
+                        faker.classList.remove('show-filter')
+                        this.filterShown = false;
+                    }
+
+                },
+                sortAscendant: function(event) {
+                    this.activeButtonFilter(event);
+
                     this.results = this.rootResults.slice().sort(function(a, b) {
                         return a.priceAmount - b.priceAmount;
                     });
                     console.log(this.results)
                 },
-                sortDescendant: function() {
+                sortDescendant: function(event) {
+                    this.activeButtonFilter(event);
+
                     this.results = this.rootResults.slice().sort(function(a, b) {
                         return b.priceAmount - a.priceAmount;
                     });
                     console.log(this.results)
                 },
-                sortRandom: function() {
+                sortRandom: function(event) {
+                    this.activeButtonFilter(event);
+                    
                     min = Math.ceil(0);
                     max = Math.floor(rootResults.length);
 
@@ -189,13 +227,16 @@
                         item.order = Math.floor(Math.random() * (max - min) + min); 
                     });
                 },
-                sourceAmazon: function() {
+                sourceAmazon: function(event) {
+                    this.activeButtonFilter(event);
 
                 },
-                sourceFlipkart: function() {
+                sourceFlipkart: function(event) {
+                    this.activeButtonFilter(event);
 
                 },
-                sourceRandom: function() {
+                sourceRandom: function(event) {
+                    this.activeButtonFilter(event);
 
                 },
                 sourceAscendant: function() {
@@ -205,6 +246,30 @@
 
                 },
                 pagination: function(number) {
+
+                },
+                clearAllFilterButtonClass: function() {
+                    //get filter
+                    var filter = document.querySelector('.filter')
+                    //count how many buttons container it got
+                    var buttons = filter.querySelectorAll('.buttons')
+                    var containerCount = buttons.length
+                    //select first container of buttons
+                    for(var i = 0; i < containerCount; i++) {
+                        var buttonContainer = buttons[i];
+                        var button = buttonContainer.getElementsByTagName('button');
+                        var buttonCount = button.length;
+
+                        for(var j = 0; j < buttonCount; j++) {
+                            button[j].classList.remove('active')
+                        }
+                    }
+                },
+                activeButtonFilter: function(event) {
+                    this.clearAllFilterButtonClass();
+
+                    const selectedBtn = event.path[0];
+                    selectedBtn.classList.add('active');
 
                 }
 

@@ -32,9 +32,21 @@ function currencyCnv(price) {
         total = Number((total).toFixed(0))
         return total;
     }
+    else {
+        return 0;
+    }
 }
 
-module.exports = { mergeJson, currencyCnv };
+function notNaN(x) {
+    return !(x !== x);
+}
+
+function hasNumber(myString) {
+    return /\d/.test(myString);
+}
+
+
+module.exports = { mergeJson, currencyCnv, notNaN, hasNumber };
 
 /*
 var price = 1470000;

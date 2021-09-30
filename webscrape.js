@@ -85,14 +85,17 @@ async function amazon(keyword, browser) {
             var linkTemp = await linkEl.getProperty('href');
             var link = await linkTemp.jsonValue();
             
+            var VpriceAmount = helper.hasNumber(price) ? helper.currencyCnv(price) : 0;
+            var Vprice = helper.hasNumber(price) ? '$' + dollarUSLocale.format(helper.currencyCnv(price)) : "not mentioned 🤔";
+
             var data = {
                 id: 'amazon' + i,
                 order: '',
                 image: img,
                 title: title.split(' ').slice(0, 4).join(' '),
                 subtitle: title.split(' ').slice(4, 10).join(' '),
-                priceAmount: helper.currencyCnv(price),
-                price: '$' + dollarUSLocale.format(helper.currencyCnv(price)),
+                priceAmount: VpriceAmount,
+                price: Vprice,
                 link: link,
                 source: 'amazon'
             }
@@ -152,14 +155,17 @@ async function flipkart(keyword, browser) {
             var linkTemp = await linkEl.getProperty('href');
             var link = await linkTemp.jsonValue();
             
+            var VpriceAmount = helper.hasNumber(price) ? helper.currencyCnv(price) : 0;
+            var Vprice = helper.hasNumber(price) ? '$' + dollarUSLocale.format(helper.currencyCnv(price)) : "not mentioned 🤔";
+
             var data = {
                 id: 'flipkart' + i,
                 order: '',
                 image: img,
                 title: title.split(' ').slice(0, 4).join(' '),
                 subtitle: title.split(' ').slice(4, 10).join(' '),
-                priceAmount: helper.currencyCnv(price),
-                price: '$' + dollarUSLocale.format(helper.currencyCnv(price)),
+                priceAmount: VpriceAmount,
+                price: Vprice,
                 link: link,
                 source: 'flipkart'
             }
