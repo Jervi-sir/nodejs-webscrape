@@ -4,9 +4,9 @@
 |Hosted on Heroku, front end rendered from nodejs as ejs|
 |[link hunt-digits](https://hunt-digits.herokuapp.com/)|
 
-```
-http://localhost:8000/api/login
-POST
-name:
-password:
-```
+### Scraped sites
+-[x] amazon
+-[x] flipkart
+-[ ] gumtree
+-[ ] ebay
+-[ ] aliexpress
