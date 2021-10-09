@@ -5,8 +5,8 @@
 |[link hunt-digits](https://hunt-digits.herokuapp.com/)|
 
 ### Scraped sites
--[x] amazon
--[x] flipkart
--[ ] gumtree
--[ ] ebay
--[ ] aliexpress
+- [x] amazon
+- [x] flipkart
+- [ ] gumtree
+- [ ] ebay
+- [ ] aliexpress
